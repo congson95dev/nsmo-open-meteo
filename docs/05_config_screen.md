@@ -1,0 +1,35 @@
+# Screen 3: Configuration
+
+This screen has 3 sections:
+- Hourly
+- Daily
+- Weekly
+
+Each section contains the SAME inputs:
+
+1. Plant location (Latitude, Longitude)
+   - Default: 16.0678, 108.2208
+2. Total plant capacity
+   - Default: 38
+3. Number of turbines
+   - Default: 7
+4. Turbine power curve (editable or readonly JSON)
+
+Default power curve:
+[ (0.0, 0.0), (2.5, 22.99), (3.0, 96.91), (3.5, 201.84), (4.0, 331.78), (4.5, 491.62), (5.0, 689.27), (5.5, 927.72), (6.0, 1212.8), (6.5, 1546.49), (7.0, 1930.59), (7.5, 2364.15), (8.0, 2842.86), (8.5, 3349.47), (9.0, 3856.83), (9.5, 4333.08), (10.0, 4732.37), (10.5, 5014.26), (11.0, 5186.42), (11.5, 5287.83), (12.0, 5337.37), (12.5, 5374.41), (13.0, 5392.43), (13.5, 5397.84), (14.0, 5400.0), (14.5, 5400.0), (15.0, 5400.0), (15.5, 5400.0), (16.0, 5400.0), (16.5, 5400.0), (17.0, 5394.6), (17.5, 5394.6), (18.0, 5378.22), (18.5, 5365.23), (19.0, 5319.86), (19.5, 5208.02), (20.0, 4980.81), (20.5, 4659.64), (21.0, 4293.96), (21.5, 3902.44), (22.0, 3499.51), (22.5, 3090.68), (23.0, 2753.12), (23.5, 2486.95), (24.0, 2235.84), ]
+
+Behavior:
+- On load:
+  - Fetch config from API
+  - If API returns empty → use default values
+- Each section has:
+  - Preview button
+  - Save button
+
+Preview:
+- Navigate to Line Chart screen
+- DO NOT save anything
+
+Save:
+- Send config to n8n API
+- Persist to Google Sheet
