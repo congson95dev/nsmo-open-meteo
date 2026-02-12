@@ -38,6 +38,25 @@ npm run dev
 npm run build
 ```
 
+## Deploy on VPS (Nginx serving static files)
+
+Build the app and copy `dist/` to your VPS:
+
+```
+VITE_N8N_BASE_URL=https://stdirm.ezn8n.com/ VITE_DEBUG_MODE=0 npm run build
+```
+
+Nginx example for `/app/`:
+
+```
+location /app/ {
+  root /var/www/app;
+  try_files $uri /app/index.html;
+}
+```
+
+Place the built files at `/var/www/app/app/` so the `/app/` prefix resolves.
+
 ## API Reference
 
 See `docs/09_api_reference.md`.
@@ -51,4 +70,3 @@ See `docs/09_api_reference.md`.
 
 - Env changes require restarting `npm run dev`.
 - If API calls fail due to CORS in dev, use the Vite proxy or enable CORS on the API.
-

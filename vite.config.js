@@ -26,6 +26,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     envDir: ".",
+    base: "/app/",
     define: {
       "import.meta.env.VITE_N8N_BASE_URL": JSON.stringify(baseUrl),
     },
