@@ -66,9 +66,9 @@ services:
         VITE_N8N_BASE_URL: ${VITE_N8N_BASE_URL}
         VITE_DEBUG_MODE: ${VITE_DEBUG_MODE:-0}
     container_name: web
-    command: sh -c "cp -r /app/dist /dist && tail -f /dev/null"
+    command: sh -c "rm -rf /out/* && cp -r /app/dist/* /out/"
     volumes:
-      - ./dist:/dist
+      - /var/www/html/app:/out
 
 networks:
   n8n-network:

@@ -46,16 +46,16 @@ Build the app and copy `dist/` to your VPS:
 VITE_N8N_BASE_URL=https://stdirm.ezn8n.com/ VITE_DEBUG_MODE=0 npm run build
 ```
 
-Nginx example for `/app/`:
+Nginx example for `/app/` (serving from `/var/www/html`):
 
 ```
 location /app/ {
-  root /var/www/app;
+  root /var/www/html;
   try_files $uri /app/index.html;
 }
 ```
 
-Place the built files at `/var/www/app/app/` so the `/app/` prefix resolves.
+Place the built files at `/var/www/html/app/` so the `/app/` prefix resolves.
 
 ## API Reference
 
