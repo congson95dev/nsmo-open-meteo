@@ -57,6 +57,21 @@ location /app/ {
 
 Place the built files at `/var/www/html/app/` so the `/app/` prefix resolves.
 
+## Nginx Config (VPS)
+
+The reference nginx config is stored in `nginx/n8n`. On a fresh VPS, copy it to:
+
+```
+sudo cp nginx/n8n /etc/nginx/sites-available/n8n
+```
+
+Then reload nginx:
+
+```
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
 ## API Reference
 
 See `docs/09_api_reference.md`.

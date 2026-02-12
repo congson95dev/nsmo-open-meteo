@@ -54,7 +54,7 @@ function AppLayout({ children }) {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/app">
       <AppLayout>
         <Routes>
           <Route path="/" element={<Login />} />
