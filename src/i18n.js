@@ -55,7 +55,9 @@ const resources = {
       chart: {
         title: "Line Chart",
         windSpeed: "Wind speed",
+        windSpeedColumn: "Wind speed column",
         power: "Power",
+        powerVsWind: "Wind speed",
         fetchError: "Could not fetch chart data.",
         saveSuccess: "Chart data saved.",
       },
@@ -114,7 +116,9 @@ const resources = {
       chart: {
         title: "Biểu đồ",
         windSpeed: "Tốc độ gió",
+        windSpeedColumn: "Cột tốc độ gió",
         power: "Công suất",
+        powerVsWind: "So sánh công suất / tốc độ gió",
         fetchError: "Không thể tải dữ liệu.",
         saveSuccess: "Đã lưu dữ liệu biểu đồ.",
       },

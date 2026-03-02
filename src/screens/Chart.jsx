@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import {
   LineChart,
   Line,
+  Bar,
   XAxis,
   YAxis,
   Tooltip,
@@ -11,9 +12,8 @@ import {
   CartesianGrid,
   Legend,
 } from "recharts";
-import { calcPower, fetchConfig, saveConfig } from "../api/n8n";
+import { calcPower, fetchConfig } from "../api/n8n";
 import { DEFAULT_CONFIG } from "../data/defaults";
-import LoadingButton from "../components/LoadingButton";
 
 function normalizePeriod(period) {
   if (period === "daily" || period === "weekly") return period;
@@ -31,16 +31,13 @@ export default function Chart() {
   );
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   useEffect(() => {
     let active = true;
     const load = async () => {
       setLoading(true);
       setError("");
-      setSuccess("");
       try {
         let cfg = incomingConfig;
         if (!cfg) {
@@ -77,20 +74,6 @@ export default function Chart() {
     };
   }, [incomingConfig, period, t]);
 
-  const handleSubmit = async () => {
-    setSaving(true);
-    setError("");
-    setSuccess("");
-    try {
-      await saveConfig({ period, config });
-      setSuccess(t("config.saveSuccess"));
-    } catch (err) {
-      setError(err.message || t("common.error"));
-    } finally {
-      setSaving(false);
-    }
-  };
-
   const content = useMemo(() => {
     if (loading) {
       return <div className="card">{t("common.loading")}</div>;
@@ -104,20 +87,30 @@ export default function Chart() {
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="time" />
-            <YAxis />
+            <YAxis yAxisId="left" />
+            <YAxis yAxisId="right" orientation="right" />
             <Tooltip />
             <Legend />
-            <Line
-              type="monotone"
+            <Bar
+              yAxisId="right"
               dataKey="windSpeed"
-              stroke="#2a6fdb"
-              name={t("chart.windSpeed")}
+              fill="#2a6fdb"
+              name={t("chart.windSpeedColumn")}
             />
             <Line
               type="monotone"
+              yAxisId="left"
               dataKey="power"
               stroke="#f97316"
               name={t("chart.power")}
+            />
+            <Line
+              type="monotone"
+              yAxisId="right"
+              dataKey="windSpeed"
+              stroke="#2a6fdb"
+              name={t("chart.windSpeed")}
+              strokeDasharray="6 4"
             />
           </LineChart>
         </ResponsiveContainer>
@@ -129,11 +122,7 @@ export default function Chart() {
     <div className="screen">
       <h1>{t("chart.title")}</h1>
       {error ? <div className="error-text">{error}</div> : null}
-      {success ? <div className="success-text">{success}</div> : null}
       {content}
-      <LoadingButton isLoading={saving} onClick={handleSubmit}>
-        {t("common.submit")}
-      </LoadingButton>
     </div>
   );
 }

@@ -6,6 +6,8 @@
 - Show clear error messages
 - Do not auto-save any data
 - Only save on explicit user action
+- Keep chart color mapping consistent:
+  - Wind speed column color must match power-vs-wind comparison line color
 
 Navigation:
 Login → Config → Chart
