@@ -27,8 +27,11 @@ Behavior:
   - Save button
 
 Preview:
-- Navigate to Line Chart screen
+- Navigate to Line Chart screen (`/chart`) with the selected section (hourly/daily/weekly) as preview state
 - DO NOT save anything
+
+Header:
+- Show plant name in top bar center (between app title and right menu): `Nhà máy Điện gió Tân Hợp`
 
 Save:
 - Send config to n8n API

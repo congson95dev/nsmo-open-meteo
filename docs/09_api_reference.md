@@ -144,23 +144,40 @@ Example request:
 }
 ```
 
+## Calculate XLSX Export Data
+
+```
+POST https://stdirm.ezn8n.com/webhook/calc-xlsx
+```
+
+Payload:
+- Same as `/calc-power`
+- `section` determines response shape (`hourly`, `daily`, `weekly`)
+
+Response notes:
+- `hourly` / `daily`: `data` is an array with `cycle`, `wind_speed_ms`, `power_mw`, `power_kw`
+- `weekly`: `data` is an array with `cycle`, `dayIndex`, `day`, `wind_speed_ms`, `power_mw`, `power_kw`
+
 Example response:
 
 ```json
 {
   "success": true,
   "status_code": 200,
-  "data": [
-    {
-      "wind_speed_ms": 0.92,
-      "power_mw": 0.05922223999999999,
-      "power_kw": 59.222239999999985
-    },
-    {
-      "wind_speed_ms": 0.91,
-      "power_mw": 0.05857852000000001,
-      "power_kw": 58.57852000000001
-    }
-  ]
+  "data": {
+    "rows": [
+      {
+        "wind_speed_ms": 0.92,
+        "power_mw": 0.05922223999999999,
+        "power_kw": 59.222239999999985
+      },
+      {
+        "wind_speed_ms": 0.91,
+        "power_mw": 0.05857852000000001,
+        "power_kw": 58.57852000000001
+      }
+    ],
+    "time": ["2026-03-10T00:00", "2026-03-10T00:15"]
+  }
 }
 ```

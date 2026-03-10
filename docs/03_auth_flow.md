@@ -15,7 +15,8 @@ Flow:
    - Hash or decode input password
    - Compare with API result
 5. If valid → login success
-6. If invalid → show error message
+6. On success, navigate to Line Chart screen (`/chart`)
+7. If invalid → show error message
 
 Rules:
 - Do NOT store plain password

@@ -35,13 +35,32 @@ select {
 }
 
 .topbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   padding: 16px 24px;
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   gap: 16px;
+}
+
+.topbar-left {
+  justify-self: start;
+}
+
+.topbar-center {
+  justify-self: center;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.topbar-right {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .mock-banner {
@@ -185,9 +204,91 @@ button:disabled {
   padding: 16px;
 }
 
+.period-switch {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.period-switch .period-btn {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.period-switch .period-btn.is-active {
+  background: #111827;
+  color: #ffffff;
+}
+
+.chart-export-btn {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+.button-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: button-spin 0.8s linear infinite;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.chart-legend {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chart-legend-marker {
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.chart-legend-marker-power {
+  background: #f97316;
+}
+
+.chart-legend-marker-wind {
+  background: #2a6fdb;
+}
+
 @media (max-width: 720px) {
   .topbar {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .topbar-left,
+  .topbar-center,
+  .topbar-right {
+    justify-self: start;
+    width: 100%;
+  }
+
+  .topbar-right {
+    justify-content: space-between;
   }
 }

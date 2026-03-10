@@ -4,7 +4,7 @@ const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("vi");
 
   const value = useMemo(
     () => ({

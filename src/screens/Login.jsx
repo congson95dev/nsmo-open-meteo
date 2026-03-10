@@ -36,7 +36,7 @@ export default function Login() {
         return;
       }
       setUser({ username: data?.username || username.trim() });
-      navigate("/config");
+      navigate("/chart");
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log("[login] error", err);

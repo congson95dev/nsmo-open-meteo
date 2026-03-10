@@ -39,6 +39,14 @@ function n8nUrl(path) {
   return `${cleanBase}/${cleanPath}`;
 }
 
+function xlsxUrl() {
+  const url =
+    import.meta?.env?.VITE_XLSX_API_URL ||
+    APP_CONFIG.xlsxApiUrl ||
+    "https://stdirm.ezn8n.com/webhook/calc-xlsx";
+  return String(url || "").trim();
+}
+
 function parsePowerCurve(input) {
   if (!input) return DEFAULT_CONFIG.hourly.powerCurve;
   if (Array.isArray(input)) return input;
@@ -120,6 +128,25 @@ export async function calcPower(payload) {
   ensureBaseUrl();
   const cfg = payload?.config || {};
   return httpJson(n8nUrl(APP_CONFIG.endpoints.calcPower), {
+    method: "POST",
+    body: JSON.stringify({
+      lat: cfg.latitude,
+      long: cfg.longitude,
+      turbine_number: cfg.turbineCount,
+      power_curve: stringifyPowerCurve(cfg.powerCurve),
+      section: payload?.section,
+      wind_speed: payload?.windSpeed,
+    }),
+  });
+}
+
+export async function calcXlsx(payload) {
+  const endpoint = xlsxUrl();
+  if (!endpoint) {
+    throw new Error("Missing calc-xlsx API URL (VITE_XLSX_API_URL)");
+  }
+  const cfg = payload?.config || {};
+  return httpJson(endpoint, {
     method: "POST",
     body: JSON.stringify({
       lat: cfg.latitude,

@@ -62,7 +62,7 @@ export default function Config() {
   };
 
   const handlePreview = (sectionKey) => {
-    navigate(`/chart/${sectionKey}`, {
+    navigate("/chart", {
       state: { config: config[sectionKey], period: sectionKey },
     });
   };
